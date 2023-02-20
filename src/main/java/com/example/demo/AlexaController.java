@@ -8,11 +8,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 
 @RestController
 @RequestMapping("/alexa")
-public class AlexaController {
+public class        AlexaController {
     private static String BASE_URL = "https://sandbox.api.service.nhs.uk/hello-world/hello/world";
 
     @GetMapping
@@ -20,8 +22,8 @@ public class AlexaController {
         return "Hello, World!";
     }
 
-    @GetMapping(path='/nhs-hello')
-    public String nhsHello(){
+    @GetMapping(path="/nhs-hello")
+    public String nhsHello() throws IOException {
         URL obj = new URL(BASE_URL);
         HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
         connection.setRequestMethod("GET");
